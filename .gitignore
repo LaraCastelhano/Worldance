@@ -1,6 +1,13 @@
-venv/
 .venv/
+venv/
 __pycache__/
-*.pyc
+.pytest_cache/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.env
 *.db
 *.db-journal
+
+
