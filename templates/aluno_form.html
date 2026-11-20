@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Registar aluno</h2>
+
+{% if erros %}
+<ul style="color: red;">
+  {% for erro in erros %}<li>{{ erro }}</li>{% endfor %}
+</ul>
+{% endif %}
+
+<form method="post">
+  <p><label>Nome: <input type="text" name="nome" value="{{ dados.get('nome', '') }}"></label></p>
+  <p><label>Email: <input type="text" name="email" value="{{ dados.get('email', '') }}"></label></p>
+  <p><label>Telefone: <input type="text" name="telefone" value="{{ dados.get('telefone', '') }}"></label></p>
+  <button type="submit">Guardar</button>
+  <a href="{{ url_for('listar_alunos') }}">Cancelar</a>
+</form>
+{% endblock %}

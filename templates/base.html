@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Worldance</title>
+</head>
+<body>
+  <h1>Worldance</h1>
+  <nav><a href="{{ url_for('listar_alunos') }}">Alunos</a></nav>
+
+  {% for mensagem in get_flashed_messages() %}
+    <p style="color: green;">{{ mensagem }}</p>
+  {% endfor %}
+
+  {% block conteudo %}{% endblock %}
+</body>
+</html>
