@@ -1,10 +1,12 @@
+from datetime import date
 from persistencia import inserir_aluno, listar_alunos as _listar
 
 
-def registar_aluno(nome, email, telefone):
+def registar_aluno(nome, email, telefone, data_nascimento):
     nome = " ".join((nome or "").split())
     email = (email or "").strip()
     telefone = (telefone or "").strip()
+    data_nascimento = (data_nascimento or "").strip()
 
     erros = []
 
@@ -24,12 +26,37 @@ def registar_aluno(nome, email, telefone):
     if len(telefone) > 15:
         erros.append("O telefone não pode ter mais de 15 caracteres.")
 
+    data_iso = None
+    if not data_nascimento:
+        erros.append("A data de nascimento é obrigarória.")
+    else:
+        try:
+            nascimento = date.fromisoformat(data_nascimento)
+        except ValueError:
+            erros.append("A data de nascimento não é válida.")
+        else:
+            if nascimento > date.today():
+                erros.append("A data de nascimento não é válida.")
+            elif nascimento.year < 1900:
+                erros.append("A data de nascimento não é válida.")
+            else:
+                data_iso = nascimento.isoformat()
+
     if erros:
         return False, erros
 
-    inserir_aluno(nome, email, telefone or None)
+    inserir_aluno(nome, email, telefone or None, data_iso)
     return True, []
 
 
 def listar_alunos():
-    return _listar()
+    alunos = _listar()
+    for aluno in alunos:
+        texto = aluno["data_nascimento"]
+        if texto:
+            try:
+                aluno["data_nascimento"] = date.fromisoformat(
+                    texto).strftime("%d/%m/%Y")
+            except ValueError:
+                pass
+    return alunos

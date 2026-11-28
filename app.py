@@ -27,6 +27,7 @@ def novo_aluno():
 
     dados = {
         "nome": request.form.get("nome", ""),
+        "data_nascimento": request.form.get("data_nascimento", ""),
         "email": request.form.get("email", ""),
         "telefone": request.form.get("telefone", ""),
     }

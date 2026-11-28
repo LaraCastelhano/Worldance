@@ -10,6 +10,11 @@
 
 <form method="post">
   <p><label>Nome: <input type="text" name="nome" value="{{ dados.get('nome', '') }}"></label></p>
+  <div class="mb-3">
+    <label for="data_nascimento" class="form-label">Data de nascimento *</label>
+    <input type="date" class="form-control" id="data_nascimeto"
+           name="data_nascimento" value="{{ dados.get('data_nascimento', '')}}">
+  </div>
   <p><label>Email: <input type="text" name="email" value="{{ dados.get('email', '') }}"></label></p>
   <p><label>Telefone: <input type="text" name="telefone" value="{{ dados.get('telefone', '') }}"></label></p>
   <button type="submit">Guardar</button>
